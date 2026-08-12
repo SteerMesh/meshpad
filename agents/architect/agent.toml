@@ -1,0 +1,18 @@
+[agent]
+id          = "architect"
+description = "Provides architecture guidance, design patterns, and technical decisions"
+prompt      = "prompt.md"
+backend     = ""
+welcome     = "🏗️  Architect ready. What design problem are we solving?"
+
+[agent.tools]
+enabled = ["read_file", "list_dir"]
+
+[agent.trust]
+level = "strict"
+
+[agent.skills]
+use = ["architecture-patterns", "go-patterns"]
+
+[agent.subagents]
+can_delegate = []

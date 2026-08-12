@@ -1,0 +1,18 @@
+[agent]
+id          = "tester"
+description = "Writes tests, runs coverage, validates behavior"
+prompt      = "prompt.md"
+backend     = ""
+welcome     = "🧪 Tester ready. What should I test?"
+
+[agent.tools]
+enabled = ["read_file", "write_file", "run_shell", "list_dir"]
+
+[agent.trust]
+level = "supervised"
+
+[agent.skills]
+use = ["go-patterns", "testing-patterns"]
+
+[agent.subagents]
+can_delegate = []

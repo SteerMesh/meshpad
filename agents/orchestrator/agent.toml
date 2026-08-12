@@ -1,0 +1,23 @@
+[agent]
+id          = "orchestrator"
+description = "Task router — breaks down work and delegates to specialist sub-agents"
+prompt      = "prompt.md"
+backend     = ""
+welcome     = "Orchestrator ready. Describe what you need done."
+
+[agent.tools]
+enabled = ["read_file", "list_dir", "delegate"]
+
+[agent.trust]
+level = "autonomous"
+
+[agent.subagents]
+can_delegate = ["coder", "reviewer", "claude-coder", "cursor-coder", "planner", "explorer", "architect", "tester", "security", "pr-writer"]
+
+[[agent.hooks.agentSpawn]]
+command     = "../../hooks/git-context.sh"
+description = "Inject current branch and recent commits"
+
+[[agent.hooks.agentSpawn]]
+inline      = "echo '## Project: '$(basename $MESH_PROJECT_DIR)"
+description = "Inject project name"

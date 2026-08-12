@@ -1,0 +1,19 @@
+[agent]
+id          = "pr-writer"
+description = "Creates PRs — generates descriptions, pushes branches, opens PRs via gh CLI"
+prompt      = "prompt.md"
+backend     = ""
+preferred_backend = "claude-code"
+welcome     = "📝 PR writer ready. I can create the full PR for you."
+
+[agent.tools]
+enabled = ["read_file", "list_dir", "run_shell"]
+
+[agent.trust]
+level = "supervised"
+
+[agent.skills]
+use = ["pr-conventions"]
+
+[agent.subagents]
+can_delegate = []

@@ -1,0 +1,19 @@
+[agent]
+id          = "reviewer"
+description = "Code reviewer — reads code, fetches diffs, produces structured review verdicts"
+prompt      = "prompt.md"
+backend     = ""
+preferred_backend = "claude-code"
+welcome     = "🔍 Reviewer ready. Give me a PR number, branch, or files to review."
+
+[agent.tools]
+enabled = ["read_file", "list_dir", "run_shell"]
+
+[agent.trust]
+level = "supervised"
+
+[agent.skills]
+use = ["security-review", "pr-conventions"]
+
+[agent.subagents]
+can_delegate = []

@@ -1,0 +1,18 @@
+[agent]
+id          = "planner"
+description = "Creates implementation plans with tasks, dependencies, and test strategy"
+prompt      = "prompt.md"
+backend     = ""
+welcome     = "📋 Planner ready. Describe the feature or change."
+
+[agent.tools]
+enabled = ["read_file", "list_dir"]
+
+[agent.trust]
+level = "strict"
+
+[agent.skills]
+use = ["architecture-patterns"]
+
+[agent.subagents]
+can_delegate = []

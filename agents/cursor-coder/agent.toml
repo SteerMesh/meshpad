@@ -1,0 +1,15 @@
+[agent]
+id          = "cursor-coder"
+description = "Cursor Agent spawned as a full agent — brings its own tools (edit/terminal/search)"
+prompt      = "prompt.md"
+backend     = "cursor"  # type=cursor-cli in steermesh.toml — spawns the CLI
+welcome     = "🟣 Cursor Agent ready."
+
+[agent.tools]
+enabled = []
+
+[agent.trust]
+level = "autonomous"
+
+[agent.subagents]
+can_delegate = []

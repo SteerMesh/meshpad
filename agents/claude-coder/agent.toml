@@ -1,0 +1,17 @@
+[agent]
+id          = "claude-coder"
+description = "Claude Code spawned as a full agent — brings its own tools (read/write/shell/search)"
+prompt      = "prompt.md"
+backend     = "claude-code"  # type=claude-cli in steermesh.toml — spawns the CLI
+welcome     = "🟠 Claude Code agent ready."
+
+[agent.tools]
+# No mesh tools needed — Claude Code has its own built-in tools.
+# The delegate tool is listed so the orchestrator can invoke this agent.
+enabled = []
+
+[agent.trust]
+level = "autonomous"  # Claude Code handles its own permissions internally
+
+[agent.subagents]
+can_delegate = []  # Leaf agent — doesn't sub-delegate

@@ -1,0 +1,18 @@
+[agent]
+id          = "security"
+description = "Scans for OWASP vulnerabilities, secrets, injection vectors, auth flaws"
+prompt      = "prompt.md"
+backend     = ""
+welcome     = "🔒 Security reviewer ready. What should I audit?"
+
+[agent.tools]
+enabled = ["read_file", "list_dir", "run_shell"]
+
+[agent.trust]
+level = "strict"
+
+[agent.skills]
+use = ["security-review"]
+
+[agent.subagents]
+can_delegate = []

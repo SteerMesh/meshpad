@@ -1,0 +1,12 @@
+[workspace]
+id            = "solo"
+description   = "Single-project personal workspace"
+pack          = "dev"
+default_agent = "orchestrator"
+
+[[workspace.projects]]
+id   = "main"
+path = "."
+
+[[workspace.resources]]
+path = "file://README.md"

@@ -1,0 +1,11 @@
+[pack]
+id            = "dev"
+description   = "Full-stack development — orchestrator routing coder + reviewer"
+default_agent = "orchestrator"
+agents        = ["orchestrator", "coder", "reviewer"]
+skills        = ["go-patterns", "security-review"]
+steering      = ["conventions", "architecture"]
+
+[pack.overrides.reviewer]
+trust  = "strict"
+skills = ["security-review"]

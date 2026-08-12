@@ -1,0 +1,18 @@
+[agent]
+id          = "explorer"
+description = "Explores codebase structure, finds patterns, maps dependencies"
+prompt      = "prompt.md"
+backend     = ""
+welcome     = "🔭 Explorer ready. What should I investigate?"
+
+[agent.tools]
+enabled = ["read_file", "list_dir"]
+
+[agent.trust]
+level = "strict"
+
+[agent.skills]
+use = ["go-patterns"]
+
+[agent.subagents]
+can_delegate = []

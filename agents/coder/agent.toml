@@ -1,0 +1,34 @@
+[agent]
+id          = "coder"
+description = "Expert software engineer with full filesystem access"
+prompt      = "prompt.md"
+backend     = "agent"
+welcome     = "Coder ready. What are we building?"
+
+[agent.tools]
+enabled = ["read_file", "write_file", "run_shell", "list_dir", "delegate"]
+
+[agent.tools.settings]
+write_file = { blocked_paths = ["vendor/**", "*.generated.go"] }
+
+[agent.trust]
+level = "supervised"
+
+[agent.skills]
+use = ["go-patterns", "security-review"]
+
+[agent.subagents]
+can_delegate = ["reviewer"]
+
+[[agent.hooks.agentSpawn]]
+command     = "../../hooks/git-context.sh"
+description = "Inject current branch and recent commits"
+
+[[agent.hooks.agentSpawn]]
+inline      = "echo '## Session started: '$(date '+%Y-%m-%d %H:%M')"
+description = "Inject session timestamp"
+
+[[agent.hooks.preToolUse]]
+matcher     = "write_file"
+command     = "../../hooks/guard-writes.sh"
+description = "Block writes to vendor/ and generated files"
