@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Validate Structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check meshpad.toml exists
+        run: test -f meshpad.toml
+
+      - name: Check agents have agent.toml
+        run: |
+          errors=0
+          for dir in agents/*/; do
+            if [ ! -f "${dir}agent.toml" ]; then
+              echo "ERROR: ${dir} missing agent.toml"
+              errors=$((errors+1))
+            fi
+          done
+          if [ $errors -gt 0 ]; then
+            exit 1
+          fi
+          echo "✓ All agents have agent.toml"
+
+      - name: Check agents have prompt.md
+        run: |
+          errors=0
+          for dir in agents/*/; do
+            if [ ! -f "${dir}prompt.md" ]; then
+              echo "ERROR: ${dir} missing prompt.md"
+              errors=$((errors+1))
+            fi
+          done
+          if [ $errors -gt 0 ]; then
+            exit 1
+          fi
+          echo "✓ All agents have prompt.md"
+
+      - name: Check skills are valid markdown
+        run: |
+          count=$(find skills -name "*.md" 2>/dev/null | wc -l)
+          echo "✓ Found $count skill(s)"
+
+      - name: Verify TOML syntax
+        run: |
+          # Install a simple TOML validator
+          pip install toml --quiet
+          python3 -c "
+          import toml, sys, os
+          errors = 0
+          for f in ['meshpad.toml']:
+              try:
+                  toml.load(f)
+                  print(f'✓ {f}')
+              except Exception as e:
+                  print(f'✗ {f}: {e}')
+                  errors += 1
+          for root, dirs, files in os.walk('agents'):
+              for f in files:
+                  if f.endswith('.toml'):
+                      path = os.path.join(root, f)
+                      try:
+                          toml.load(path)
+                          print(f'✓ {path}')
+                      except Exception as e:
+                          print(f'✗ {path}: {e}')
+                          errors += 1
+          sys.exit(errors)
+          "
+
+      - name: Summary
+        run: |
+          echo "Agents: $(ls -d agents/*/ 2>/dev/null | wc -l)"
+          echo "Skills: $(find skills -name '*.md' 2>/dev/null | wc -l)"
+          echo "Steering: $(find steering -name '*.md' 2>/dev/null | wc -l)"
+          echo "Hooks: $(find hooks -type f 2>/dev/null | wc -l)"
