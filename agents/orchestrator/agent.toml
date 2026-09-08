@@ -12,7 +12,7 @@ enabled = ["read_file", "list_dir", "delegate"]
 level = "autonomous"
 
 [agent.subagents]
-can_delegate = ["coder", "reviewer", "claude-coder", "cursor-coder", "planner", "explorer", "architect", "tester", "security", "pr-writer"]
+can_delegate = ["coder", "reviewer", "claude-coder", "cursor-coder", "codex-coder", "planner", "explorer", "architect", "tester", "security", "pr-writer"]
 
 [[agent.hooks.agentSpawn]]
 command     = "../../hooks/git-context.sh"

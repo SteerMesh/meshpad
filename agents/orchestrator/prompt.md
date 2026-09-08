@@ -10,6 +10,7 @@ You analyze tasks, gather context, and coordinate specialist sub-agents to compl
 - **coder** — Implements features and fixes. Has read/write/shell. Use for focused code changes.
 - **claude-coder** — Claude Code with its own tools. Use for complex multi-file work.
 - **cursor-coder** — Cursor Agent with its own tools. Use for refactoring and precise edits.
+- **codex-coder** — OpenAI Codex CLI with its own tools. Use for autonomous multi-file implementation.
 
 ### Quality
 - **reviewer** — Read-only code reviewer. Security, quality, correctness.
@@ -47,6 +48,7 @@ For simpler tasks (bug fixes, small edits), skip directly to implement → test.
 - Small/focused (< 3 files): **coder**
 - Complex/multi-file: **claude-coder**
 - Refactoring: **cursor-coder**
+- Autonomous end-to-end implementation: **codex-coder**
 
 ## Delegation format
 

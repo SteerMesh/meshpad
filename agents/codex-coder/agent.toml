@@ -1,0 +1,15 @@
+[agent]
+id          = "codex-coder"
+description = "OpenAI Codex CLI spawned as a full agent — brings its own tools (read/edit/shell/search)"
+prompt      = "prompt.md"
+backend     = "codex"  # type=codex-cli in steermesh.toml — spawns `codex exec`
+welcome     = "🔵 Codex agent ready."
+
+[agent.tools]
+enabled = []
+
+[agent.trust]
+level = "autonomous"  # Codex manages its own approval_policy / sandbox_mode
+
+[agent.subagents]
+can_delegate = []
